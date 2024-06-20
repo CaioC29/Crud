@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="Imagens/Logo str redonda.png">
+    <link rel="stylesheet" href="styleADM.css">
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/shopping-cart.css' rel='stylesheet'>
+    <title>Carrinho</title>
+</head>
+<body onload="checarcarrinho()">
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="Imagens/Logo str.png"class="logoimagem"></a>
+        </div>
+        <ul>
+            <a href="index.html"><li class="optheader">Início</li></a>
+            <a href="catalogo.html"><li class="optheader">Catálogo</li></a>
+            <li class="carrinho"><i class="gg-shopping-cart"></i></li>
+        </ul>
+    </header>
+    <div class="alinhar">
+    <section>
+        <h1 class="textologin">Carrinho</h1>
+    </section>
+</div>
+    <div class="alinhar">
+        <div id="carrinho"></div>
+    </div>
+
+    <div class="alinhar">
+        <section>
+            <br>
+            <button class="logbut" id="botaoentrar" onclick="finalizar()">Finalizar Compra</button>
+            <p class="vermelho" id="aviso"></p>
+            <div id="total"></div>
+        </section>
+    </div>
+    <script src="carrinho.js"></script>
+
+</body>
+</html>

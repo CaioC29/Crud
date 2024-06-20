@@ -1,0 +1,136 @@
+script.js
+
+
+function addcarrinho(id){
+    let mostracarrinho;
+
+    alert("Produto adicionado ao carrinho");
+    const item = JSON.parse(localStorage.getItem(localStorage.key(id)));
+    
+    mostracarrinho = 
+    `<div class="lista">
+    <table>
+    <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Preço</th>
+        <th>Ação</th>
+    </tr>
+    <tr>
+        <td>${item.nome}</td>
+        <td>${item.descricao}</td>
+        <td>R$${item.preco}</td>
+        <td><button onclick="removecarrinho(${carrinho.length})" id="botao">-</button></td>
+    </tr>
+    </table>
+    </div>`; 
+}
+
+------------------------------------------------------------------------------------------------------------------------
+carrinho.js 
+
+function apresentar(){
+    const listacarrinho = document.getElementById('carrinho');
+    let i;
+
+    for(i=0; i<localStorage.length; i++){
+        const item = JSON.parse(localStorage.getItem(localStorage.key(i)));
+
+        display =
+        `<div class="lista">
+        <table>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Ação</th>
+        </tr>
+        <tr>
+            <td>${item.nome}</td>
+            <td>${item.descricao}</td>
+            <td>R$${item.preco}</td>
+            <td><button onclick="addcarrinho(${i})" id="botao">+</button></td>
+        </tr>
+        </table>
+        </div>`;
+
+        vet[i] = display;
+    }
+    
+}
+
+------------------------------------------------------------------------------------------------------------------------
+
+scriptADM.js
+
+function mostrar(){
+
+    let display;
+    let vet = [];
+    let i;
+
+    for(i=0; i<localStorage.length; i++){
+        const item = JSON.parse(localStorage.getItem(localStorage.key(i)));
+
+        display =
+        `<div class="lista">
+        <table>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Ação</th>
+        </tr>
+        <tr>
+            <td>${item.nome}</td>
+            <td>${item.descricao}</td>
+            <td>R$${item.preco}</td>
+            <td><button onclick="editar(${i})" id="botao">Editar</button></td>
+            <td><button onclick="deletar(${i})" id="botao" class="vermelho">Deletar</button></td>
+        </tr>
+        </table>
+        </div>`;
+
+        vet[i] = display;
+    }
+
+    const lista = document.getElementById('lista');
+    lista.innerHTML = vet.join(" ");
+}
+
+
+
+
+function mostrarcatalogo(){
+
+    let display;
+    let vet = [];
+    let i;
+
+    for(i=0; i<localStorage.length; i++){
+        const item = JSON.parse(localStorage.getItem(localStorage.key(i)));
+
+        display =
+        `<div class="lista">
+        <table>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Ação</th>
+        </tr>
+        <tr>
+            <td>${item.nome}</td>
+            <td>${item.descricao}</td>
+            <td>R$${item.preco}</td>
+            <td><button onclick="addcarrinho(${i})" id="botao">+</button></td>
+        </tr>
+        </table>
+        </div>`;
+
+        vet[i] = display;
+    }
+
+    const lista = document.getElementById('catalogo');
+    lista.innerHTML = vet.join(" ");
+}
