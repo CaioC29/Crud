@@ -1,0 +1,135 @@
+const produto = {
+    name: "exemplo",
+    desc: "exemplo desc",
+    price: 12
+};
+
+function salvarProduto() {
+    let produtos = JSON.parse(localStorage.getItem("produtos"));
+
+    const produto = {
+        name: document.getElementById('name').value,
+        desc: document.getElementById('description').value,
+        price: document.getElementById('price').value
+    };
+
+    if(produtos) {
+        produtos.push(produto);
+    } else {
+        produtos = [produto];
+    }
+
+    localStorage.setItem("produtos", JSON.stringify(produtos));
+    alert("Produto adicionado!");
+
+}
+
+function mostrarProdutos(){
+    let produtos = JSON.parse(localStorage.getItem("produtos"));
+    let catalogo = document.getElementById('catalogo');
+
+    if(produtos.length === 0) {
+        catalogo.innerHTML = '<h1>Não há produtos cadastrados</h1>';
+    } else {
+
+        produtos.forEach((produto, index) => {
+            let cadaproduto = document.createElement('div');
+
+            cadaproduto.innerHTML = `
+            <h1>${produto.name}</h1>
+            <p>Descrição: ${produto.desc}</p>
+            <p>Preço: ${produto.price}</p>
+            <button onclick="removerProduto(${index})">Remover</button>
+            <button onclick="editarProduto(${index})">Editar</button>
+            `;
+
+            catalogo.appendChild(cadaproduto);
+
+        });
+    }
+}
+
+function editarProduto(index){
+    let produtos = JSON.parse(localStorage.getItem("produtos")); 
+    let produto = produtos[index];
+
+    const name = prompt("Editar nome:", produto.name);
+    const desc = prompt("Editar descrição:", produto.desc);
+    const price = prompt("Editar preço:", produto.price);
+
+    if(name !== null && desc !== null && price !== null){
+        produtos[index] = { name, desc, price };
+        localStorage.setItem("produtos", JSON.stringify(produtos));
+    }
+    location.reload();
+}
+
+function removerProduto(index) {
+    let produtos = JSON.parse(localStorage.getItem("produtos"));
+    produtos.splice(index, 1);
+    localStorage.setItem("produtos", JSON.stringify(produtos));
+
+    location.reload();
+}
+
+window.onload(mostrarProdutos());
+
+
+
+
+---------------------------------------------
+pagina A:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create-rud</title>
+</head>
+<body>
+    <h1>Adicionar Produto</h1>
+    <div class="container">
+        <div id="formulario">
+            <label for="name">Nome:</label>
+            <input type="text" name="name" id="name">
+            <br>
+            <label for="description">Descrição:</label>
+            <input type="text" name="description" id="description">
+            <br>
+            <label for="price">Preço:</label>
+            <input type="text" id="price" name="price">
+            <br>
+            <button onclick="salvarProduto()" id="add">Adicionar</button>
+        </div>
+    </div>
+
+    <br>
+    <a href="pgB.html">Pagina de Produtos</a>
+
+    <script src="pgs.js"></script>
+</body>
+</html>
+
+
+
+---------------------------------------------------
+
+pagina B:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>c-RUD</title>
+</head>
+<body>
+    <h1>Produtos</h1>
+
+    <div id="catalogo">
+
+    </div>
+    <script src="pgs.js"></script>
+</body>
+</html>
